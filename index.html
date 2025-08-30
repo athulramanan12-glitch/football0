@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expected Goals (xG) Calculator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Expected Goals (xG) Calculator</h1>
+
+    <!-- Single Shot Calculator -->
+    <section>
+      <h2>Single Shot Calculator</h2>
+      <form id="xgForm" onsubmit="return false;">
+        <label for="distance">Distance to Goal (meters):</label>
+        <input type="number" id="distance" step="0.1" required>
+
+        <label for="angle">Angle from Goal (degrees):</label>
+        <input type="number" id="angle" step="1" max="180" required>
+
+        <label for="shotType">Type of Shot:</label>
+        <select id="shotType">
+          <option value="foot">Foot</option>
+          <option value="head">Header</option>
+        </select>
+
+        <label for="situation">Shot Situation:</label>
+        <select id="situation">
+          <option value="openPlay">Open Play</option>
+          <option value="setPiece">Set Piece</option>
+          <option value="counterAttack">Counter Attack</option>
+        </select>
+
+        <label for="pressure">Defender Pressure:</label>
+        <select id="pressure">
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+
+        <button type="button" id="calcXG">Calculate xG</button>
+      </form>
+
+      <div id="result">
+        <h3>Expected Goals (xG): <span id="xg-result">0.00</span></h3>
+      </div>
+    </section>
+
+    <!-- Multi Shot Calculator -->
+    <section>
+      <h2>Multiple Shots Calculator</h2>
+      <div id="shotInputs">
+        <div class="shot-input">
+          <label>Distance (m):</label>
+          <input type="number" class="distance" step="0.1">
+
+          <label>Angle (°):</label>
+          <input type="number" class="angle" step="1" max="180">
+
+          <label>Type:</label>
+          <select class="shotType">
+            <option value="foot">Foot</option>
+            <option value="head">Header</option>
+          </select>
+
+          <label>Situation:</label>
+          <select class="situation">
+            <option value="openPlay">Open Play</option>
+            <option value="setPiece">Set Piece</option>
+            <option value="counterAttack">Counter Attack</option>
+          </select>
+
+          <label>Pressure:</label>
+          <select class="pressure">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="button" id="addShot">+ Add Another Shot</button>
+      <button type="button" id="calcTotalXG">Calculate Total xG</button>
+
+      <div id="totalResult">
+        <h3>Total xG: <span id="total-xg-result">0.00</span></h3>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
