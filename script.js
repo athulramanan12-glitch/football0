@@ -100,56 +100,57 @@ document.getElementById("calcTotalXG").addEventListener("click", () => {
   document.getElementById("total-xg-result").textContent = total.toFixed(2);
 });
 
-// --- Pitch click detection ---
-const pitch = document.getElementById("pitch");
-const ctx = pitch.getContext("2d");
+window.onload = () => {
+  const pitch = document.getElementById("pitch");
+  const ctx = pitch.getContext("2d");
 
-// Draw simple pitch
-function drawPitch() {
-  ctx.fillStyle = "#6ab150";
-  ctx.fillRect(0, 0, pitch.width, pitch.height);
+  // Draw simple pitch
+  function drawPitch() {
+    ctx.fillStyle = "#6ab150";
+    ctx.fillRect(0, 0, pitch.width, pitch.height);
 
-  ctx.strokeStyle = "white";
-  ctx.lineWidth = 2;
+    ctx.strokeStyle = "white";
+    ctx.lineWidth = 2;
 
-  // Outer rectangle
-  ctx.strokeRect(20, 20, pitch.width - 40, pitch.height - 40);
+    // Outer rectangle
+    ctx.strokeRect(20, 20, pitch.width - 40, pitch.height - 40);
 
-  // Center line
-  ctx.beginPath();
-  ctx.moveTo(pitch.width / 2, 20);
-  ctx.lineTo(pitch.width / 2, pitch.height - 20);
-  ctx.stroke();
+    // Center line
+    ctx.beginPath();
+    ctx.moveTo(pitch.width / 2, 20);
+    ctx.lineTo(pitch.width / 2, pitch.height - 20);
+    ctx.stroke();
 
-  // Center circle
-  ctx.beginPath();
-  ctx.arc(pitch.width / 2, pitch.height / 2, 50, 0, 2 * Math.PI);
-  ctx.stroke();
+    // Center circle
+    ctx.beginPath();
+    ctx.arc(pitch.width / 2, pitch.height / 2, 50, 0, 2 * Math.PI);
+    ctx.stroke();
 
-  // Goal box (simplified, one side)
-  ctx.strokeRect(pitch.width / 2 - 60, 20, 120, 60);
-}
-drawPitch();
+    // Goal box (simplified, one side)
+    ctx.strokeRect(pitch.width / 2 - 60, 20, 120, 60);
+  }
 
-// Handle click
-pitch.addEventListener("click", (event) => {
-  const rect = pitch.getBoundingClientRect();
-  const x = event.clientX - rect.left;
-  const y = event.clientY - rect.top;
+  drawPitch();
 
-  // Show coordinates
-  document.getElementById("coords").textContent = `Clicked at: X=${x.toFixed(0)}, Y=${y.toFixed(0)}`;
+  // Handle click
+  pitch.addEventListener("click", (event) => {
+    const rect = pitch.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
 
-  // Autofill distance/angle (example: distance = how far from bottom goal)
-  const goalX = pitch.width / 2;
-  const goalY = 20; // top goal line
-  const dx = x - goalX;
-  const dy = y - goalY;
+    document.getElementById("coords").textContent =
+      `Clicked at: X=${x.toFixed(0)}, Y=${y.toFixed(0)}`;
 
-  const distance = Math.sqrt(dx * dx + dy * dy) / 10; // scale to meters
-  const angle = Math.atan2(Math.abs(dx), dy) * (180 / Math.PI);
+    // Example: distance & angle relative to top-center goal
+    const goalX = pitch.width / 2;
+    const goalY = 20;
+    const dx = x - goalX;
+    const dy = y - goalY;
 
-  // Autofill form
-  document.getElementById("distance").value = distance.toFixed(1);
-  document.getElementById("angle").value = angle.toFixed(0);
-});
+    const distance = Math.sqrt(dx * dx + dy * dy) / 10; // scale to meters
+    const angle = Math.atan2(Math.abs(dx), dy) * (180 / Math.PI);
+
+    document.getElementById("distance").value = distance.toFixed(1);
+    document.getElementById("angle").value = angle.toFixed(0);
+  });
+};
