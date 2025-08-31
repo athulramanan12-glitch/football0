@@ -1,0 +1,8 @@
+#pitch {
+  display: block;
+  margin: 20px auto;
+  border: 2px solid #333;
+  background: #6ab150; /* green pitch */
+  border-radius: 6px;
+  cursor: crosshair;
+}
