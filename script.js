@@ -129,28 +129,5 @@ window.onload = () => {
     // Goal box (simplified, one side)
     ctx.strokeRect(pitch.width / 2 - 60, 20, 120, 60);
   }
-
-  drawPitch();
-
-  // Handle click
-  pitch.addEventListener("click", (event) => {
-    const rect = pitch.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-
-    document.getElementById("coords").textContent =
-      `Clicked at: X=${x.toFixed(0)}, Y=${y.toFixed(0)}`;
-
-    // Example: distance & angle relative to top-center goal
-    const goalX = pitch.width / 2;
-    const goalY = 20;
-    const dx = x - goalX;
-    const dy = y - goalY;
-
-    const distance = Math.sqrt(dx * dx + dy * dy) / 10; // scale to meters
-    const angle = Math.atan2(Math.abs(dx), dy) * (180 / Math.PI);
-
-    document.getElementById("distance").value = distance.toFixed(1);
-    document.getElementById("angle").value = angle.toFixed(0);
-  });
+  
 };
