@@ -129,5 +129,52 @@ window.onload = () => {
     // Goal box (simplified, one side)
     ctx.strokeRect(pitch.width / 2 - 60, 20, 120, 60);
   }
+
+  window.onload = () => {
+  const pitch = document.getElementById("pitch");
+  const ctx = pitch.getContext("2d");
+
+  function drawPitch() {
+    // Fill background green
+    ctx.fillStyle = "#6ab150";
+    ctx.fillRect(0, 0, pitch.width, pitch.height);
+
+    ctx.strokeStyle = "white";
+    ctx.lineWidth = 2;
+
+    // Outer boundary
+    ctx.strokeRect(20, 20, pitch.width - 40, pitch.height - 40);
+
+    // Center line
+    ctx.beginPath();
+    ctx.moveTo(pitch.width / 2, 20);
+    ctx.lineTo(pitch.width / 2, pitch.height - 20);
+    ctx.stroke();
+
+    // Center circle
+    ctx.beginPath();
+    ctx.arc(pitch.width / 2, pitch.height / 2, 50, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Penalty box (top)
+    ctx.strokeRect(pitch.width / 2 - 60, 20, 120, 60);
+
+    // Penalty box (bottom)
+    ctx.strokeRect(pitch.width / 2 - 60, pitch.height - 80, 120, 60);
+  }
+
+  drawPitch();
+
+  // Capture clicks
+  pitch.addEventListener("click", (e) => {
+    const rect = pitch.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    document.getElementById("coords").textContent =
+      `Clicked at: X=${x.toFixed(0)}, Y=${y.toFixed(0)}`;
+  });
+};
+
   
 };
